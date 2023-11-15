@@ -1,0 +1,24 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* styles/globals.css */
+.leading-tighter {
+    line-height: 1;
+    /* Adjust this value as needed */
+}
+
+/* styles/global.css */
+.card.active {
+    border-left: 4px solid blue;
+    background-color: #eff6ff;
+    /* Light blue background */
+    color: #1d4ed8;
+    /* Darker blue text */
+}
+
+.scroll-item {
+    transition: opacity 0.3s ease-in-out;
+    margin-bottom: 2rem;
+    /* Add more styles as needed */
+}
