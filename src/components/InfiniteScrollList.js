@@ -3,62 +3,64 @@ import styles from '../styles/InfiniteScrollList.module.css';
 
 const InfiniteScrollList = () => {
     const [items, setItems] = useState([]);
-    const [page, setPage] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
-    const loader = useRef(null);
+    const [highlightedIndex, setHighlightedIndex] = useState(null);
+    const itemRefs = useRef(new Array());
 
     useEffect(() => {
-        const observer = new IntersectionObserver(handleObserver, {
-            root: null,
-            rootMargin: '20px',
-            threshold: 1.0,
-        });
-
-        if (loader.current) {
-            observer.observe(loader.current);
-        }
-
-        return () => {
-            if (loader.current) {
-                observer.disconnect();
-            }
-        };
+        // Fetch all data once and set items
+        fetch('https://mocki.io/v1/8ed4d7b7-addf-454c-ac5c-7d873a083920')
+            .then(response => response.json())
+            .then(data => {
+                setItems(data);
+            })
+            .catch(error => console.error(error));
     }, []);
 
     useEffect(() => {
-        // Fetch data when the component mounts and when the page changes
-        if (hasMore) {
-            fetch(`https://mocki.io/v1/8ed4d7b7-addf-454c-ac5c-7d873a083920?page=${page}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length === 0) {
-                        setHasMore(false);
-                    } else {
-                        setItems(prevItems => [...prevItems, ...data]);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const index = itemRefs.current.indexOf(entry.target);
+                    if (entry.isIntersecting) {
+                        setHighlightedIndex(index);
                     }
-                })
-                .catch(error => console.error(error));
-        }
-    }, [page, hasMore]);
+                });
+            },
+            {
+                root: null,
+                threshold: 0.75, // Adjust this value based on how much of the item has to be in view to be highlighted
+            }
+        );
 
-    const handleObserver = entities => {
-        const target = entities[0];
-        if (target.isIntersecting) {
-            setPage(prevPage => prevPage + 1);
-        }
-    };
+        itemRefs.current.forEach((ref) => {
+            if (ref) {
+                observer.observe(ref);
+            }
+        });
+
+        return () => {
+            itemRefs.current.forEach((ref) => {
+                if (ref) {
+                    observer.unobserve(ref);
+                }
+            });
+        };
+    }, [items]);
 
     return (
-        <div>
+        <div className={styles.scrollContainer}>
             <div className={styles.itemList}>
                 {items.map((item, index) => (
-                    <div key={index} className={styles.item}>
+                    <div
+                        key={index}
+                        ref={(el) => (itemRefs.current[index] = el)}
+                        className={`${styles.item} ${highlightedIndex === index ? styles.highlighted : ''}`}
+                    >
                         <h2>{item.title}</h2>
                         <p>{item.description}</p>
                     </div>
                 ))}
             </div>
-            {hasMore && <div ref={loader} className={styles.loader} />}
         </div>
     );
 };
