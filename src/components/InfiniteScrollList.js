@@ -3,8 +3,11 @@ import styles from '../styles/InfiniteScrollList.module.css';
 
 const InfiniteScrollList = () => {
     const [items, setItems] = useState([]);
-    const [highlightedIndex, setHighlightedIndex] = useState(null);
-    const itemRefs = useRef(new Array());
+    const [displayItems, setDisplayItems] = useState([]);
+    const [page, setPage] = useState(0);
+    const [highlightedIndex, setHighlightedIndex] = useState(0);
+    const itemListRef = useRef(null);
+    const loader = useRef(null);
 
     useEffect(() => {
         // Fetch all data once and set items
@@ -12,55 +15,57 @@ const InfiniteScrollList = () => {
             .then(response => response.json())
             .then(data => {
                 setItems(data);
+                setDisplayItems(data.slice(0, 5)); // Initially display first 5 items
             })
             .catch(error => console.error(error));
     }, []);
 
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    const index = itemRefs.current.indexOf(entry.target);
-                    if (entry.isIntersecting) {
-                        setHighlightedIndex(index);
-                    }
-                });
-            },
-            {
-                root: null,
-                threshold: 0.75, // Adjust this value based on how much of the item has to be in view to be highlighted
+        const observer = new IntersectionObserver(entries => {
+            const firstEntry = entries[0];
+            if (firstEntry.isIntersecting) {
+                setPage(page => page + 1);
             }
-        );
+        }, { threshold: 1.0 });
 
-        itemRefs.current.forEach((ref) => {
-            if (ref) {
-                observer.observe(ref);
-            }
-        });
+        if (loader.current) {
+            observer.observe(loader.current);
+        }
 
-        return () => {
-            itemRefs.current.forEach((ref) => {
-                if (ref) {
-                    observer.unobserve(ref);
-                }
-            });
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        const nextPageItems = items.slice(page * 5, (page + 1) * 5);
+        setDisplayItems(prevItems => [...prevItems, ...nextPageItems]);
+    }, [page, items]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const { scrollTop } = itemListRef.current;
+            const currentIndex = Math.floor(scrollTop / 100); // Assuming each item is 100px high
+            setHighlightedIndex(currentIndex);
         };
-    }, [items]);
+
+        const itemListElement = itemListRef.current;
+        itemListElement.addEventListener('scroll', handleScroll);
+
+        return () => itemListElement.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <div className={styles.scrollContainer}>
-            <div className={styles.itemList}>
-                {items.map((item, index) => (
-                    <div
-                        key={index}
-                        ref={(el) => (itemRefs.current[index] = el)}
-                        className={`${styles.item} ${highlightedIndex === index ? styles.highlighted : ''}`}
-                    >
+            <div ref={itemListRef} className={styles.itemList}>
+                {displayItems.map((item, index) => (
+                    <div key={index} className={`${styles.item} ${highlightedIndex === index ? styles.highlighted : ''}`}>
                         <h2>{item.title}</h2>
                         <p>{item.description}</p>
                     </div>
                 ))}
             </div>
+            <div ref={loader} className={styles.loader} />
+            <div className={styles.blurTop} />
+            <div className={styles.blurBottom} />
         </div>
     );
 };
