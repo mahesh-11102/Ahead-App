@@ -1,4 +1,4 @@
-// src/components/ScrollCardSection.js
+
 import React, { useEffect, useRef } from 'react';
 import ScrollCard from './ScrollCard';
 import { gsap } from 'gsap';

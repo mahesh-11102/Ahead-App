@@ -1,4 +1,3 @@
-// src/components/ScrollCard.js
 export default function ScrollCard({ title, description, isActive }) {
     const activeClass = isActive ? 'bg-blue-500 text-white' : 'bg-white text-gray-800';
     return (

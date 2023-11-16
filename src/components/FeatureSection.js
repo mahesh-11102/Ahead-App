@@ -1,22 +1,19 @@
-// src/components/FeatureSection.js
 import Lottie  from 'lottie-react';
 import React from 'react';
-import angry from '../../public/angry_bear.json'; // Update the path as needed
-// Import your Lottie animation JSON file
-import animationData from '../../public/animal.json'; // Update the path as needed
+import angry from '../../public/angry_bear.json'; 
+import animationData from '../../public/animal.json';
 
 const FeatureSection = () => {
     return (
         <div className="flex items-center bg-pink-100 p-12">
             <div className="flex-1">
-                {/* Lottie animation */}
                 <Lottie animationData={animationData} style={{ maxWidth: '500px', margin: '0 auto' }} />
             </div>
             <div className="flex-1">
-                <div className="border-t-4 border-orange-500 w-16"></div> {/* Line above the heading */}
+                <div className="border-t-4 border-orange-500 w-16"></div> 
                 <div className="flex justify-center items-center flex-wrap">
                     <h2 className="text-lg uppercase tracking-widest text-gray-600 mt-2">Built out of frustration</h2>
-                    <div className="w-15 h-15"> {/* Adjust width and height as needed */}
+                    <div className="w-15 h-15"> 
                         <Lottie  animationData={angry} style={{ width: '15%', height: 'auto' }} />
                     </div>
                 </div>

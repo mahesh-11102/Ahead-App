@@ -1,7 +1,10 @@
 // src/components/Card.js
-export default function Card({ emoji, title, description }) {
+import React from 'react';
+import styles from '../styles/CardSection..module.css'; // Assuming you want to use the same CSS module
+
+function Card({ emoji, title, description }) {
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white p-6 m-4">
+        <div className={styles.card}>
             <div className="text-center">
                 <div className="text-3xl">{emoji}</div>
                 <div className="font-bold text-xl mb-2">{title}</div>
@@ -10,3 +13,5 @@ export default function Card({ emoji, title, description }) {
         </div>
     );
 }
+
+export default Card;
