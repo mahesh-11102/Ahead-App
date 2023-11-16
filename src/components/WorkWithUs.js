@@ -54,43 +54,110 @@ const WorkWithUs = () => {
                             </motion.div>
                             <div className="flex flex-col gap-3 p-4">
                                 <h2 className="font-bold">About</h2>
-                                <p className="font-normal">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Accusamus fugit ipsum voluptate deserunt, non velit a
-                                    blanditiis officia dolor eligendi eveniet cumque quasi
-                                    reprehenderit minus?
+                                <p className="font-normal text-[20px]">
+                                    At ahead our goal is to make self-
+                                    improvement fun and lasting. We know there's
+                                    a way how to make it work. And that's what
+                                    aHead is all about!
+
                                 </p>
                             </div>
 
                             <div className="flex flex-col gap-2 pt-8  p-4 rounded-2xl  mt-8 bg-orange-50">
                                 <h2 className="font-bold">Product</h2>
-                                <p className="font-normal">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                    Dolore temporibus dignissimos, laboriosam corporis deleniti
-                                    quod quidem explicabo? Repellendus officiis odit corrupti
-                                    ducimus soluta dolor accusamus repellat, nostrum suscipit,
-                                    distinctio ipsam!
+                                <p className="font-normal text-[20px]">
+                                    Sure, you could spend ages reading books or
+                                    sitting in seminars on how to become a better
+                                    spouse, parent, or manager - like we did...
+
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div className="flex flex-col gap-5 max-h-[75vh] overflow-y-auto pr-6 custom-scrollbar">
-                        {[...Array(6)].map((val, index) => (
+                        
                             <div
                                 className="p-4 bg-white rounded-2xl space-y-6 w-[20rem]"
-                                key={index}
                             >
-                                <h2 className="font-bold">
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing.
+                                <h2 className="font-bold text-[20px]">
+                                    Power through, even when the
+                                    going gets tough
+                                    
+
                                 </h2>
                                 <p className="font-normal">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Accusamus fugit ipsum voluptate deserunt, non velit a
-                                    blanditiis officia dolor eligendi eveniet cumque quasi
-                                    reprehenderit minus?
+                                    We help you spot and work around
+                                    whatever stands in the way, be it bad
+                                    habits, fears, etc.
                                 </p>
                             </div>
-                        ))}
+                        
+                            <div
+                                className="p-4 bg-white rounded-2xl space-y-6 w-[20rem]"
+                            >
+                            <h2 className="font-bold text-[20px]">
+                                    Master how to make it happen
+                                    in real life
+                                    
+
+                                    
+
+                                </h2>
+                                <p className="font-normal">
+                                    We support you towards ninja-level skills
+                                    with sleek tools such as dry-runs, quizzes,
+                                    and flashcards.
+                                </p>
+                            </div>
+                        
+                            <div
+                                className="p-4 bg-white rounded-2xl space-y-6 w-[20rem]"
+                            >
+                            <h2 className="font-bold text-[20px]">
+                                    Get support that's made
+                                    for your needs
+                                
+                                    
+
+                                </h2>
+                                <p className="font-normal">
+                                    We build your personal roadmap Of
+                                    lessons and actions towards your goals.
+                                </p>
+                            </div>
+                        
+                            <div
+                                className="p-4 bg-white rounded-2xl space-y-6 w-[20rem]"
+                            >
+                            <h2 className="font-bold text-[20px]">
+                                    Power through, even when the
+                                    going gets tough
+                                    
+
+                                </h2>
+                                <p className="font-normal">
+                                    We help you spot and work around
+                                    whatever stands in the way, be it bad
+                                    habits, fears, etc.
+                                </p>
+                            </div>
+                        
+                            <div
+                                className="p-4 bg-white rounded-2xl space-y-6 w-[20rem]"
+                            >
+                            <h2 className="font-bold text-[20px]">
+                                    Power through, even when the
+                                    going gets tough
+                                    
+
+                                </h2>
+                                <p className="font-normal">
+                                    We help you spot and work around
+                                    whatever stands in the way, be it bad
+                                    habits, fears, etc.
+                                </p>
+                            </div>
+                        
                     </div>
                 </div>
             </section>

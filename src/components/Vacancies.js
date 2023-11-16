@@ -88,7 +88,7 @@ const HoverCard = ({ vac, index }) => {
                         }}
                         className="mx-10 cursor-pointer text-white bg-black rounded-full px-3 py-2 mt-4"
                     >
-                        Click Me
+                        See Details
                     </motion.button>
                 )}
             </motion.div>

@@ -29,7 +29,7 @@ export default function Home() {
     <div className="bg-[#fff] min-h-screen"> 
       <Header />
       <Head>
-        <title>Your App Name</title>
+        <title>Mahesh Dasika</title>
         <meta name="description" content="Master your life by mastering emotions with Your App Name." />
       </Head>
       
